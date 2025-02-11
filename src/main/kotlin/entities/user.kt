@@ -1,13 +1,14 @@
 package com.r4men.entities
 
-import org.jetbrains.exposed.dao.id.IntIdTable
+import kotlinx.serialization.Serializable
 
-object Users : IntIdTable() {
-    val name = varchar("name", 50)
-    val surname = varchar("surname", 50)
-    val UserType = varchar("user_type", 10)
-    val group: String = reference()
-}
+@Serializable
+data class User(
+    val name: String,
+    val surname: String,
+    val userType: UserType,
+    val group: String
+)
 
 enum class UserType(val type: String){
     STUDENT("student"),
