@@ -24,17 +24,15 @@ object Subjects : IntIdTable() {
     val title = varchar("title", 100) // Название
 }
 
-object Groups : Table() {
-    private val specialName = varchar("special_name", 50) // Специальное название
+object Groups : IntIdTable() {
+    private val specialName = varchar("special_name", 50).uniqueIndex() // Специальное название
     val title = varchar("title", 100) // Название группы
     val topics = text("topics") // Темы
     val studyTime = integer("study_time") // Время изучения
-
-    override val primaryKey = PrimaryKey(specialName)
 }
 
 object Lessons : IntIdTable() {
-    val date = date("date") // Дата
+    val date = varchar("date", 10) // Дата
     val subjectId = reference("subject_id", Subjects) // Внешний ключ на Subjects
     val groupId = reference("group_id", Groups) // Внешний ключ на Groups
     val orderInDay = integer("order_in_day") // Порядковый номер в день
