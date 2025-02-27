@@ -8,10 +8,11 @@ object Users : IntIdTable() {
     val login = varchar("login", 50).uniqueIndex() // Логин как первичный ключ
     val name = varchar("name", 50)
     val surname = varchar("surname", 50)
+    val password = varchar("password", 50)
 }
 
 object Students : IntIdTable() {
-    val userId = reference("user_id", Users) // Внешний ключ на Users
+    val userId = reference("user_id ", Users) // Внешний ключ на Users
     val group = varchar("group", 50) // Группа
 }
 
@@ -39,8 +40,18 @@ object Lessons : IntIdTable() {
 }
 
 object Marks : Table() {
-    val studentId = reference("student_id", Students) // Внешний ключ на Students
-    val lessonId = reference("lesson_id", Lessons) // Внешний ключ на Lessons
+    private val studentId = reference("student_id", Students.userId) // Внешний ключ на Students
+    private val lessonId = reference("lesson_id", Lessons) // Внешний ключ на Lessons
     val grade = integer("grade") // Оценка
     override val primaryKey = PrimaryKey(studentId, lessonId) // Композитный первичный ключ
+}
+
+object Themes: IntIdTable(){
+    private val subject = reference("subjectId", Subjects.specialName)
+    private val timeForLearnInHours = integer("timeForLearn")
+}
+
+object ActiveTokens: IntIdTable(){
+    private val userId = reference("userId", Users.id)
+    private val value = varchar("token", 255)
 }

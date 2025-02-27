@@ -1,21 +1,14 @@
 package com.r4men
 
-import com.r4men.entities.Users
+import com.r4men.dbUtils.DatabaseFactory
+import com.r4men.entities.*
 import io.ktor.server.application.*
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.transactions.transaction
 
 fun Application.configureDatabase(){
-    Database.connect(
-        url = "jdbc:postgresql://localhost:5432/postgres",
-        user = "postgres",
-        password = "Axiomazzz_1903"
-    )
+    DatabaseFactory.init()
 
-    transaction {
-        SchemaUtils.create(Users)
-    }
-
-
+    SchemaUtils.create(Users, Students, Teachers, Subjects, Groups, Lessons, Marks, Themes)
 }
