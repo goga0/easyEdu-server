@@ -2,11 +2,11 @@ package com.r4men.utils
 
 import com.auth0.jwt.JWT
 import com.auth0.jwt.algorithms.Algorithm
-import com.r4men.entities.User
+import com.r4men.entities.LoggingUser
 import java.util.*
 
 @Suppress("INTEGER_OVERFLOW")
-fun jwtFactory(user: User): String{
+fun jwtFactory(user: LoggingUser): String{
     val jwtIssuer = "easyEdu.com"
     val jwtSecret = "pomelo123"
     val token = JWT.create()

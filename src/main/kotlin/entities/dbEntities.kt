@@ -3,6 +3,9 @@ package com.r4men.entities
 import org.jetbrains.exposed.dao.id.IntIdTable
 import org.jetbrains.exposed.sql.Table
 
+object EduPlace: IntIdTable(){
+    val name = varchar("name", 255)
+}
 
 object Users : IntIdTable() {
     val login = varchar("login", 50).uniqueIndex() // Логин как первичный ключ
