@@ -18,7 +18,9 @@ object Users : IntIdTable() {
 
 object Students : IntIdTable() {
     val userId = reference("user_id ", Users.id) // Внешний ключ на Users
-    val group = varchar("group", 50) // Группа
+    val groupId = reference("group", Groups.id) // Группа
+    val name = reference("studentName", Users.name)
+
 }
 
 object Teachers : IntIdTable() {

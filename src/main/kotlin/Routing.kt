@@ -8,6 +8,7 @@ import io.ktor.server.application.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
+import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.insertAndGetId
 import org.jetbrains.exposed.sql.selectAll
@@ -23,20 +24,19 @@ fun Application.configureRouting() {
     routing {
         post("/register"){
             val regCredentials = call.receive<RegisteringStudent>()
-            val registeringUser = transaction {
-                if(regCredentials.role == Role.STUDENT){
-                  Users.insertAndGetId {
-                      it[eduPlaceId] = regCredentials.eduPlaceId
-                      it[login] = regCredentials.login
-                      it[name] = regCredentials.name
-                      it[surname] = regCredentials.surname
-                      it[password] = ShaHasher.hashPassword(regCredentials.password)
-                  }
+            val registeredUserId = transaction {
+                if (regCredentials.role == Role.STUDENT) {
+                    Users.insertAndGetId {
+                        it[eduPlaceId] = regCredentials.eduPlaceId
+                        it[login] = regCredentials.login
+                        it[name] = regCredentials.name
+                        it[surname] = regCredentials.surname
+                        it[password] = ShaHasher.hashPassword(regCredentials.password)
+                    }
                 }
-
+            }
             val addingStudent = transaction{
                 Students.insert {
-                    it[userId] = regCredentials.id
                     it[group] = regCredentials.group
                 }
             }
