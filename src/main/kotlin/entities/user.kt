@@ -10,7 +10,7 @@ data class LoggingUser(
 )
 
 @Serializable
-data class RegisteringUser(
+data class RegisteringStudent(
     val eduPlaceId: Int,
     val login: String,
     val password: String,

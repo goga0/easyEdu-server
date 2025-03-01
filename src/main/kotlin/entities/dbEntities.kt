@@ -8,19 +8,21 @@ object EduPlace: IntIdTable(){
 }
 
 object Users : IntIdTable() {
+    val eduPlaceId = reference("eduPlaceID", EduPlace.id)
     val login = varchar("login", 50).uniqueIndex() // Логин как первичный ключ
     val name = varchar("name", 50)
     val surname = varchar("surname", 50)
     val password = varchar("password", 50)
+    val role = varchar("role", 10)
 }
 
 object Students : IntIdTable() {
-    val userId = reference("user_id ", Users) // Внешний ключ на Users
+    val userId = reference("user_id ", Users.id) // Внешний ключ на Users
     val group = varchar("group", 50) // Группа
 }
 
 object Teachers : IntIdTable() {
-    val userId = reference("user_id", Users) // Внешний ключ на Users
+    val userId = reference("user_id", Users.id) // Внешний ключ на Users
 }
 
 object Subjects : IntIdTable() {
