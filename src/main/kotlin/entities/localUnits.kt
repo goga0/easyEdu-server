@@ -10,14 +10,14 @@ data class LoggingUser(
 )
 
 @Serializable
-data class RegisteringStudent(
+data class UserUnit(
     val eduPlaceId: Int,
     val group: Int,
     val login: String,
     val password: String,
     val name: String,
     val surname: String,
-    val role: Role
+    val role: String
 )
 
 @Serializable
@@ -32,8 +32,9 @@ data class RegisterResponse(
 )
 
 @Serializable
-enum class Role {
-    STUDENT, TEACHER
+enum class Role(val strValue: String) {
+    STUDENT("STUDENT"),
+    TEACHER("TEACHER")
 }
 
 @Serializable

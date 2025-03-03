@@ -20,6 +20,7 @@ repositories {
 }
 
 dependencies {
+    implementation("io.ktor:ktor-server-status-pages:3.0.0")
     implementation("io.ktor:ktor-auth-jwt:1.6.8")
     implementation("org.jetbrains.exposed:exposed-java-time:0.30.1")
     implementation("org.jetbrains.exposed:exposed-core:0.58.0")
