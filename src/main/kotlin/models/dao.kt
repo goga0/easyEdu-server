@@ -57,6 +57,9 @@ class SubjectTopic(id: EntityID<Int>): IntEntity(id){
 
 class Lesson(id: EntityID<Int>): IntEntity(id){
     companion object: IntEntityClass<Lesson>(Lessons)
-    var
+    var date by Lessons.date
+    var subjectId by Lessons.subjectId
+    var topic by Lessons.topic
+    var groupId by Lessons.groupId
 }
 

@@ -3,6 +3,7 @@ package com.r4men
 import com.r4men.entities.*
 import com.r4men.models.Students
 import com.r4men.models.Users
+import com.r4men.repos.DatabaseTransactions
 import com.r4men.utils.ShaHasher
 import com.r4men.utils.jwtFactory
 import io.ktor.http.*
@@ -30,12 +31,7 @@ fun Application.configureRouting() {
     routing {
         post("/register"){
             val regCredentials = call.receive<UserUnit>()
-            val registeredUserId =
-            val addingStudent = transaction{
-                Students.insert {
-                    it[group] = regCredentials.group
-                }
-            }
+            val registeredUserId = DatabaseTransactions().createUser(regCredentials)
 
             }
         }
@@ -80,4 +76,4 @@ fun Application.configureRouting() {
             }
         }
     }
-}
+

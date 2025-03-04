@@ -16,4 +16,8 @@ fun Application.module() {
     configureSecurity()
     configureRouting()
     configureDatabase()
+    install(CallLogging) {
+        level = Level.INFO
+        format { call -> "${call.request.httpMethod.value} ${call.request.uri}" }
+    }
 }
