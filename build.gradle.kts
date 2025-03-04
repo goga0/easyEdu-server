@@ -20,14 +20,13 @@ repositories {
 }
 
 dependencies {
-    implementation("ch.qos.logback:logback-classic:1.4.12")
-    implementation("io.ktor:ktor-server-status-pages:3.0.0")
-    implementation("io.ktor:ktor-auth-jwt:1.6.8")
-    implementation("org.jetbrains.exposed:exposed-java-time:0.30.1")
-    implementation("org.jetbrains.exposed:exposed-core:0.58.0")
-    implementation("org.jetbrains.exposed:exposed-dao:0.58.0")
-    implementation("org.jetbrains.exposed:exposed-jdbc:0.58.0")
-    implementation("org.postgresql:postgresql:42.7.2")
+    implementation(libs.status.pages)
+    implementation(libs.ktor.auth.jwt)
+    implementation(libs.exposed.java.time)
+    implementation(libs.exposed.core)
+    implementation(libs.exposed.dao)
+    implementation(libs.exposed.jdbc)
+    implementation(libs.postgresql)
     implementation(libs.koin.ktor)
     implementation(libs.koin.logger.slf4j)
     implementation(libs.ktor.server.content.negotiation)

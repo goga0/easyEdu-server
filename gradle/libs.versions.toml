@@ -4,6 +4,11 @@ koin-version = "3.5.6"
 kotlin-version = "2.1.10"
 ktor-version = "3.0.3"
 logback-version = "1.4.14"
+status-pages = "3.0.0"
+auth-jwt = "1.6.8"
+exposed-javaTime = "0.30.1"
+exposed-ver = "0.58.0"
+postgres = "42.5.6"
 
 [libraries]
 koin-ktor = { module = "io.insert-koin:koin-ktor", version.ref = "koin-version" }
@@ -18,6 +23,14 @@ ktor-server-netty = { module = "io.ktor:ktor-server-netty", version.ref = "ktor-
 logback-classic = { module = "ch.qos.logback:logback-classic", version.ref = "logback-version" }
 ktor-server-test-host = { module = "io.ktor:ktor-server-test-host", version.ref = "ktor-version" }
 kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin-version" }
+status-pages = {module = "io.ktor:ktor-server-status-pages", version.ref = "status-pages"}
+ktor-auth-jwt = {module = "io.ktor:ktor-auth-jwt", version.ref = "auth-jwt"}
+exposed-java-time = { module = "org.jetbrains.exposed:exposed-java-time", version.ref = "exposed-javaTime"}
+exposed-core = {module = "org.jetbrains.exposed:exposed-core", version.ref = "exposed-ver"}
+exposed-dao = {module = "org.jetbrains.exposed:exposed-dao", version.ref = "exposed-ver"}
+exposed-jdbc = {module = "org.jetbrains.exposed:exposed-jdbc", version.ref = "exposed-ver"}
+postgresql = {module = "org.postgresql:postgresql", version.ref = "postgres"}
+
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin-version" }

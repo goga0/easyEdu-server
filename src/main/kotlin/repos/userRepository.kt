@@ -2,14 +2,17 @@ package com.r4men.repos
 
 import com.r4men.entities.Role
 import com.r4men.entities.UserUnit
+import com.r4men.models.User
 import com.r4men.models.Users
 import com.r4men.utils.ShaHasher
+import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.insertAndGetId
+import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.transaction
 
 class DatabaseTransactions {
 
-    fun createUser(user: UserUnit): Int?{
+    suspend fun createUser(user: UserUnit): Int?{
         return try {
             transaction {
                 val userId = Users.insertAndGetId {
@@ -28,8 +31,19 @@ class DatabaseTransactions {
         }
     }
 
-    fun findUserByID(){
+    suspend fun findUserByID(id: Int): UserUnit?{
+        return try{
+            transaction {
+                Users.select(Users.id).where{
+                    Users.id eq id
+                }.map{
 
+                }.singleOrNull()
+            }.value
+        } catch(e: Exception){
+            println(e)
+            null
+        }
     }
 
     fun updateExistingUser(){

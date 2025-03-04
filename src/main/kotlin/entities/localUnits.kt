@@ -39,6 +39,6 @@ enum class Role(val strValue: String) {
 
 @Serializable
 sealed class Result{
-    data object Success : Result()
+    data class Success(val successMessage: String) : Result()
     data class Failure(val errorMessage: String): Result()
 }
