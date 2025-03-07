@@ -12,13 +12,14 @@ data class LoggingUser(
 @Serializable
 data class UserUnit(
     val eduPlaceId: Int,
-    val group: Int,
+    val group: Int?,
     val login: String,
     val password: String,
     val name: String,
     val surname: String,
     val role: String
 )
+
 
 @Serializable
 data class LoginResponse(
@@ -36,6 +37,12 @@ enum class Role(val strValue: String) {
     STUDENT("STUDENT"),
     TEACHER("TEACHER")
 }
+
+@Serializable
+data class GroupUnit(
+    val title: String,
+    val specialName: String
+)
 
 @Serializable
 sealed class Result{

@@ -2,7 +2,7 @@ package com.r4men
 
 import com.r4men.entities.*
 import com.r4men.models.Users
-import com.r4men.repos.DatabaseTransactions
+import com.r4men.repos.UserDatabaseTransactions
 import com.r4men.utils.jwtFactory
 import io.ktor.http.*
 import io.ktor.server.application.*
@@ -28,11 +28,18 @@ fun Application.configureRouting() {
     routing {
         post("/register"){
             val regCredentials = call.receive<UserUnit>()
-            val registeredUserId = DatabaseTransactions().createUser(regCredentials)
+            val registeredUserId = if( regCredentials.role == Role.STUDENT.strValue){
+                UserDatabaseTransactions.createStudent(regCredentials)
+            }  else if(regCredentials.role == Role.TEACHER.strValue){
+                UserDatabaseTransactions.createTeacher(regCredentials)
+        } else {
+            null
+            }
+            }
             if(registeredUserId != null){
-                call.respond(Result.Success(""))
+                call.respond(Result.Success("User added Successfully"))
             } else {
-                call.respond(Result.Failure("something went wrong ${StatusPages.}"))
+                call.respond(Result.Failure("something went wrong ${StatusPages.key}"))
             }
         }
 
