@@ -14,10 +14,19 @@ data class UserUnit(
     val eduPlaceId: Int,
     val group: Int?,
     val login: String,
-    val password: String,
+    val password: String?,
     val name: String,
     val surname: String,
     val role: String
+)
+
+@Serializable
+data class StudentUnit(
+    val eduPlaceId: Int,
+    val group: Int?,
+    val login: String,
+    val name: String,
+    val surname: String
 )
 
 

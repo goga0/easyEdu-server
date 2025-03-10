@@ -23,16 +23,16 @@ object UserDatabaseTransactions {
                     it[login] = user.login
                     it[name] = user.name
                     it[surname] = user.surname
-                    it[password] = ShaHasher.hashPassword(user.password)
+                    it[password] = ShaHasher.hashPassword(user.password!!)
                     it[role] = user.role
                 }.value
             }
             transaction {
                 Students.insert {
                     it[Students.userId] = userId
-                    it[Students.name] = user.name
-                    it[Students.login] = user.login
-                    it[Students.groupId] = user.groupId
+                    it[name] = user.name
+                    it[login] = user.login
+                    it[groupId] = user.group!!
                 }
             }
             userId
@@ -42,7 +42,7 @@ object UserDatabaseTransactions {
         }
     }
 
-    suspend fun findUserByID(id: Int): StudentUnit?{
+    suspend fun findStudentByID(id: Int): StudentUnit?{
         return try{
             transaction {
                 Users.select(Users.id).where{

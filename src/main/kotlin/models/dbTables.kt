@@ -28,6 +28,7 @@ object Students : Table() {
 }
 
 object Teachers : IntIdTable() {
+    val eduPlaceId = reference("eduPlace", Users.eduPlaceId)
     val userId = reference("user_id", Users.id) // Внешний ключ на Users
     val name = reference("teacherName", Users.name)
     val surname = reference("teacherSurname", Users.surname)
@@ -50,18 +51,20 @@ object SubjectTopics: IntIdTable(){
     val timeForLearn = integer("timeForLearn")
 }
 
-object Lessons : IntIdTable() {
+object Lessons : Table() {
     val date = varchar("date", 10) // Дата
     val subjectId = reference("subject_id", Subjects.id) // Внешний ключ на Subjects
     val topic = reference("LessonTopic", SubjectTopics.title)
     val groupId = reference("group_id", Groups) // Внешний ключ на Groups
     val orderInDay = integer("order_in_day") // Порядковый номер в день
+
+    override val primaryKey = PrimaryKey()
 }
 
 object Marks : Table() {
     private val date = varchar("MarkDate", 10)
     private val studentId = reference("student_id", Students.userId) // Внешний ключ на Students
-    private val lessonId = reference("lesson_id", Lessons.id) // Внешний ключ на Lessons
+    private val lessonId = reference("lesson_id", Lessons.primaryKey) // Внешний ключ на Lessons
     val value = integer("grade") // Оценка
     override val primaryKey = PrimaryKey(studentId, lessonId, date) // Композитный первичный ключ
 }
