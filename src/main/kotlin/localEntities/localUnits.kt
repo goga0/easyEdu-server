@@ -1,5 +1,6 @@
 package com.r4men.entities
 
+import com.r4men.models.User
 import kotlinx.serialization.Serializable
 
 @Serializable

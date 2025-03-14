@@ -8,5 +8,5 @@ import org.jetbrains.exposed.sql.SchemaUtils
 fun Application.configureDatabase(){
     DatabaseFactory.init()
 
-    SchemaUtils.create( EduPlace , Users, Students, Teachers, Subjects, Groups, Lessons, Marks, Themes)
+    SchemaUtils.create( EduPlaces , Users, Students, Teachers, Subjects, Groups, Lessons, Marks)
 }
